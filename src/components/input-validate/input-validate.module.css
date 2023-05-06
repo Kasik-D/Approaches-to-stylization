@@ -1,0 +1,14 @@
+.active {
+    background-color: black;
+    color: white;
+}
+
+.base {
+    background-color: white;
+    color: black;
+}
+
+.invalid {
+    background-color: red;
+    color: white;
+}

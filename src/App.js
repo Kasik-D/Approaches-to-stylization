@@ -1,24 +1,48 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
 import './App.css';
+import { ButtonSCAnimation, ButtonSCBase, ButtonSCExtending, ButtonSCWithProps, InputValidate, INStyleButton, ModuleButton, ModuleInput } from './components';
+import { InputValidate2 } from './components/input-validate/input-validate2';
+import { InputValidate3 } from './components/input-validate/input-validate3';
+import { theme } from './theme/theme';
 
 function App() {
+
+ const [primary, setPrimary] = useState(false)
+
+ useEffect(() => {
+  setTimeout(() => {
+    setPrimary(true)
+  }, 1000);
+ })
+
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <InputValidate/>  */}
+      <InputValidate2 />
+      <InputValidate3 />
+      {/* <INStyleButton/>
+      <ModuleButton/>
+      <ModuleInput/> */}
+      {/* <InputValidate marginTop={100} /> */}
+      {/* <ButtonSCBase>
+        Click me!
+      </ButtonSCBase> */}
+      {/* <ButtonSCWithProps>
+        Click me
+      </ButtonSCWithProps>
+      <ButtonSCWithProps primary={primary}>
+        Click me
+      </ButtonSCWithProps> */}
+      {/* <ButtonSCExtending>
+        Click me
+      </ButtonSCExtending> */}
+      {/* <ButtonSCAnimation isAnimatedOnHover>
+        Click me
+      </ButtonSCAnimation> */}
     </div>
+    </ThemeProvider>
   );
 }
 
