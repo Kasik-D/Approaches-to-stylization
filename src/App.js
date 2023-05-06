@@ -19,9 +19,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <div className="App">
-      {/* <InputValidate/>  */}
-      <InputValidate2 />
-      <InputValidate3 />
+      <InputValidate/> 
+      {/* <InputValidate2 />
+      <InputValidate3 /> */}
       {/* <INStyleButton/>
       <ModuleButton/>
       <ModuleInput/> */}

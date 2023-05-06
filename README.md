@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# Підходи до стилізації
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Початок лекціі 
 
-In the project directory, you can run:
+### **З чого почалась революція в стилях CSS**
 
-### `npm start`
+Все почалось в 2014 році коли на конференціі NationJS виступив Крістофер Чедо, де він розповів з якими проблемами вони зіткнулись в Facebook 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Глобальний простір імен
+- Залежності
+- Усунення мертвого коду
+- Недетермінований дозвіл
+- Ізоляція
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+1. Перша відома проблема з CSS в тому, що всі селектори є глобальними як би не структурували і організовували наш код використовуючи простори імен або процедури, такі як методологія Block, Element, Modifier (BEM) Зрештою, ми завжди забруднюємо глобальний простір імен, що, як ми всі знаємо, неправильно, але так само це призводить до багатьох помилок.
+   
+2. Друга проблема CSS полягає у визначенні залежностей. Складно дізнатися, що конктерний компонент залежить від певного CSS.
+   
+3. По-третє, розробники зовнішнього інтерфейсу зазвичай використовують препроцесори, щоб розділити свій CSS на підмодулі, але для браузера створюється один великий глобальний CSS. Оскільки кодова база CSS має тенденцію стає великою, що CSS каскадний, то видалення коду стає дуже проблімотичним і майже не реальним.
+   
+4. Також є проблема, що стосується недетермінованого розшернення, в CSS, яка може виникнути, коли два або більше правил стилів мають однаковий специфічний вагу і містять те ж саме властивість. У CSS порядок має значення, і якщо підвантажувати CSS на запит, то порядок не гарантується, що призведе до порушення стилів.  
+   
+   Припустимо, наприклад, що ми хочемо оптимізувати спосіб запиту CSS, завантажуючи CSS, що стосується конкретної сторінки, тільки тоді, коли користувачі переходять на неї. Якщо в CSS, пов'язаній з цією останньою сторінкою, є деякі правила, які також застосовуються до елементів інших сторінок, той факт, що він був завантажений останнім, може вплинути на стиль іншої частини програми.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. Ізоляція CSS, проблема в тому що ми не можемо точно гарантувати нашому компонету ізоляцію від зовнішніх стилів. 
+   
+   Але в 2018 році в спеціфікацію ввели Shadow DOM, задопомогою него можно ізолювати наш компонент 
+   
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## БЕМ 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+БЕМ (Блок-Елемент-Модифікатор) - це методологія найменування класів у CSS, яка допомагає спростити організацію та підтримку стилів у веб-додатках.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ключові концепції методології БЕМ:
 
-### `npm run eject`
+- Блок: самостійний компонент, що виконує певну функцію. Він є незалежною частиною інтерфейсу, яку можна перевикористовувати в різних місцях сайту.
+  
+- Елемент: складова частина блоку, яка має власного сенсу поза блоком. Наприклад, кнопка є елементом блоку Форма.
+  
+- Модифікатор: змінює вигляд або поведінку блоку або елемента. Наприклад, модифікатор "колір" може змінити колір тексту в блоці "Заголовок".
+  
+- Кожен блок та елемент має свій унікальний клас, який складається з імені блоку або елемента та його модифікаторів. Наприклад, блок "Заголовок" може мати клас "header", а елемент "Логотип" усередині блоку "Заголовок" може мати клас "header__logo". Модифікатор "колір" може змінити зовнішній вигляд елемента і застосовується до його класу, наприклад, "header__logo-color-white".
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Переваги методології БЕМ:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Покращена організація та підтримка стилів у веб-додатках.
+- Зменшення можливості конфлікту імен класів.
+- Покращена читаність коду CSS та HTML.
+- Покращена перевикористовуваність блоків та елементів.
+  
+Недоліки методології БЕМ:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Збільшення кількості класів у HTML і CSS, що може призвести до складнішого коду.
+- Деякі розробники можуть вважати методологію БЕМ надмірною чи складною для невеликих проектів.
+- Деякі розробники можуть порушувати правила методології, що може призвести до неузгоджених імен класів.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```html
+<!-- Correct. The `error` block is semantically meaningful -->
+<div class="error"></div>
 
-## Learn More
+<!-- Incorrect. It describes the appearance -->
+<div class="red-text"></div>
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Внутрішні стилі в React 
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Офіційна документація React каже нам використовувати вбудовані стилі для компонентів. Це може здатися дивним і бо поділу логіки JS і CSS не дотримується
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Розповісти як це працює в React
 
-### Making a Progressive Web App
+Вам потрібно включити модулі CSS у проекті React. Ви можете зробити це, встановивши пакети `css-loader` `style-loader` налаштувавши їх у `webpack configuration file`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`css-loader` аналізує та інтерпретує код CSS і дозволяє будь-які імпорти або залежності, такі як оператори @importили url(), у коді CSS. Він також перетворює код CSS на об'єкт JavaScript.
 
-### Advanced Configuration
+`style-loader` бере згенерований об'єкт JavaScript `css-loader` і вставляє його в HTML-документ як `<style>` тег. Це дозволяє застосовувати CSS до відповідних компонентів у програмі React.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+У React 17 з'явилася нова функція під назвою «автоматичний імпорт під час виконання», яка дозволяє використовувати модулі CSS без додаткового налаштування.
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Styled-Componets 
 
-### `npm run build` fails to minify
+- Styled-components - це бібліотека React, яка дозволяє визначати стилі компонентів за допомогою JavaScript коду.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Вона використовує теговані шаблони для визначення стилів, що дозволяє використовувати синтаксис шаблонних рядків для написання коду CSS.
+
+- Styled-components використовує CSS-in-JS, що означає, що він генерує стилі під час виконання замість визначати їх у файлі CSS. Це дозволяє використовувати динамічні значення пропсів та глобальні змінні CSS усередині тегованих шаблонів.
+
+- Styled-components також автоматично генерує унікальні імена класів для кожного компонента, що дозволяє уникнути конфліктів між класами програми та сторонніми бібліотеками.
+
+- Крім того, styled-components підтримує створення глобальних стилів, використовуючи функцію "createGlobalStyle". Ця функція створює компонент, який може бути використаний для визначення глобальних стилів для всієї програми. Наприклад:
+
+
+## Посилання 
+
+- [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+- [BEM](https://en.bem.info/methodology/quick-start/)
+- [Styled components](https://styled-components.com/)
+- [Emotion](https://emotion.sh/docs/introduction)
