@@ -28,7 +28,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        {/* <InputValidate/>  */}
+        <InputValidate/> 
         {/* <InputValidate2 />
       <InputValidate3 /> */}
         {/* <INStyleButton/>
@@ -38,7 +38,7 @@ function App() {
         {/* <ButtonSCBase>
         Click me!
       </ButtonSCBase> */}
-        <ShadowComponent />
+        {/* <ShadowComponent /> */}
         {/* <ButtonSCWithProps>
         Click me
       </ButtonSCWithProps>
